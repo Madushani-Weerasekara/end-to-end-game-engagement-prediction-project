@@ -1,0 +1,9 @@
+# Requirements.txt file will install all the pakages need for the project.
+
+pandas
+numpy
+matplotlib
+seaborn
+ 
+
+#-e . # When ever we run the requirements.txt file this will automatically trigger/connect setup.py file

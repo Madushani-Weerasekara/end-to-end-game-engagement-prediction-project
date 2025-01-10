@@ -20,7 +20,7 @@ def get_requirements(file_path:str)->List[str]:
 
 
 setup(
-    name= 'dlproject',
+    name= 'end-to-end-game-engagement-prediction',
     version= '0.0.1',
     author='Madushani',
     author_email='mmweerasekara@gmail.com',

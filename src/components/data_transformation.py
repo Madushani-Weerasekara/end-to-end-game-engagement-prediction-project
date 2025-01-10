@@ -70,3 +70,26 @@ class DataPreprocessor:
 
         df_train['Gender'] = df_train['Gender'].map(Gender)
         df_test['Gender'] = df_test['Gender'].map(Gender)
+
+        logging.info("Data transformation applied successfully")
+
+        return df_train, df_test
+    
+    def to_tensors(self, df_train, df_test):
+
+        x_train = df_train.drop(columns=[self.target_column] + ['PlayerID'])
+        y_train = df_train[self.target_column]
+
+        x_test = df_test.drop(columns=[self.target_column] + ['PlayerID'])
+        y_test = df_test[self.target_column]
+
+        x_train_tensor = torch.tensor(x_train.to_numpy(), dtype=torch.float32)
+        y_train_tensor = torch.tensor(y_train.to_numpy(), dtype=torch.long) # Assuming target is a categorical
+
+        x_test_tensor = torch.tensor(x_test.to_numpy(), dtype=torch.float32)
+        y_test_tensor = torch.tensor(y_test.to_numpy(), dtype=torch.long)
+
+        return x_train_tensor, y_train_tensor, x_test_tensor, y_train_tensor
+
+
+

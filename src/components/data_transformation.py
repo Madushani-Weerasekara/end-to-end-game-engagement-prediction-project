@@ -19,7 +19,7 @@ import torch
 
 @dataclass
 class DataTransformationConfig:
-    preprocessor_object_file_path = os.path.join('artifacts', 'preproessor.pkl')
+    preprocessor_object_file_path = os.path.join('artifacts', 'preprocessor.pkl')
 
 class DataPreprocessor:
     def __init__(self, train_csv_path, test_csv_path, target_column):

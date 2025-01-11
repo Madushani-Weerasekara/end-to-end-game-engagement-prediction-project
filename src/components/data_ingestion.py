@@ -34,14 +34,16 @@ class DataIngestion:
             df = pd.read_csv(r'src\data\online_gaming_behavior_dataset.csv')
             logging.info("Dataset read completed.")
 
+            logging.info(f"Creating directory: {os.path.dirname(self.ingestion_config.train_data_path)}")
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
+            logging.info("Directory created or already exists.")
             df.to_csv(self.ingestion_config.raw_data_path, index=False, header=True)
 
             logging.info("train and test data initiated.")
             train_data, test_data = train_test_split(df, test_size=0.2, random_state=42)
 
             train_data.to_csv(self.ingestion_config.train_data_path, index=False, header=True)
-            test_data.to_ccsv(self.ingestion_config.test_data_path, index=False, header=True)
+            test_data.to_csv(self.ingestion_config.test_data_path, index=False, header=True)
             logging.info("Ingestion completed.")
 
             return(
@@ -51,6 +53,8 @@ class DataIngestion:
         except Exception as e:
             raise CustomException(e, sys)
 
-
+if __name__ == "__main__":
+    object=DataIngestion()
+    object.initiate_data_ingestion()
 
 

@@ -36,5 +36,26 @@ class EngageModel:
         self.path =path
              
 
+    def train(self, x_train, y_train, epochs=10, batch_size=32):
+        logging.info("Training has started...")
+        self.model.train()
+        for epoch in range(epochs):
+            permutation = torch.randperm(x_train.size()[0])
+            for i in range(0, x_train.size(), batch_size):
+                indices = permutation[i:i + batch_size]
+                batch_x, batch_y = x_train[indices].to(self.device), y_train[indices].to(self.device)
 
+                self.optimizer.zero_grad()
+                outputs = self.model(batch_x)
+                loss = self.criterion(outputs, batch_y)
+                loss.backward()
+                self.optimizer.step()
+
+                # Save the model when loss is reduced
+                train_accuracy = self.evaluate(x_train, y_train)
+                print(f"Epoch {epoch+1}/{epochs}, Loss: {loss.item()}, Training Accuracy: {train_accuracy:.4f}")
+                if self.best_accuracy < train_accuracy:
+                    self.best_accuracy = train_accuracy
+                    self.save_model()
+                logging.info("Training completed")
 

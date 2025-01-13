@@ -75,3 +75,20 @@ class EngageModel:
         accuracy = correct/total
         return accuracy
 
+    def predict(self, x):
+        self.model.eval()
+        with torch.no_grad():
+            x = x.to(self.device)
+            outputs = self.model(x)
+            _, predicted = torch.max(outputs, 1)
+        return predicted
+
+    def save_model(self):
+        torch.save(self.model.state_dict(), self.path)
+        print(f'Model saved at {self.path}')
+
+    def load_model(self):
+        self.model.load_state_dict(torch.load(self.path))
+        self.model.to(self.device)
+        print("Model loaded")
+

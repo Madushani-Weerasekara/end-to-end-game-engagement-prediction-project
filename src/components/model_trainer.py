@@ -59,3 +59,19 @@ class EngageModel:
                     self.save_model()
                 logging.info("Training completed")
 
+            
+    def evaluateModel(self, x_test, y_test, batch_size):
+        self.model.eval()
+        correct = 0
+        total = 0
+        with torch.no_grad():
+            for i in range(0, x_test.size(0), batch_size):
+                batch_x = x_test[i:i+batch_size].to(self.device)
+                batch_y = y_test[i:i+batch_size].to(self.device)
+                outputs = self.model(batch_x)
+                _, predicted = torch.max(outputs, 1)
+                total=+ batch_y.size(0)
+                correct=+ (predicted == batch_y).sum().item()
+        accuracy = correct/total
+        return accuracy
+

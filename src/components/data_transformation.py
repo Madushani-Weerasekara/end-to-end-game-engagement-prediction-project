@@ -92,4 +92,17 @@ class DataPreprocessor:
         return x_train_tensor, y_train_tensor, x_test_tensor, y_train_tensor
 
 
+if __name__ == "__main__":
+    preprocessor = DataPreprocessor(
+        train_csv_path = "artifacts/train.csv",
+        test_csv_path= "artifacts/test.csv",
+        target_column= "EngagementLevel"
+    )
+    # Load and encode data
+    df_train, df_test = preprocessor.load_and_encode_data()
 
+    # Convert to tensors
+    x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor = preprocessor.to_tensors(
+        df_train=df_train,
+        df_test=df_test
+    )

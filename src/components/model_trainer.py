@@ -10,6 +10,7 @@ from src.exception import CustomException
 from src.logger import logging
 
 from sklearn.metrics import consensus_score, ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 
 class NeuralNetwork(nn.Module):
@@ -45,11 +46,11 @@ class EngageModel:
                 indices = permutation[i:i + batch_size]
                 batch_x, batch_y = x_train[indices].to(self.device), y_train[indices].to(self.device)
 
-                self.optimizer.zero_grad()
+                self.optimizer.zero_grad() # Clear gradients from the previous step
                 outputs = self.model(batch_x)
                 loss = self.criterion(outputs, batch_y)
-                loss.backward()
-                self.optimizer.step()
+                loss.backward()  # Calculate gradients (how much each weight contributed to the error)
+                self.optimizer.step() # Adjust weights/update weights to minimize the loss
 
                 # Save the model when loss is reduced
                 train_accuracy = self.evaluate(x_train, y_train)
@@ -91,4 +92,24 @@ class EngageModel:
         self.model.load_state_dict(torch.load(self.path))
         self.model.to(self.device)
         print("Model loaded")
+
+    def compute_confusion_matrix(self, x_test, y_test):
+        self.model.eval()
+        with torch.no_grad():
+            x_test = x_test.to(self.device)
+            y_test = y_test.to(self.device)
+            outputs = self.model(x_test)
+            _, predicted = torch.max(outputs, 1)
+
+        y_actual = y_test.cpu().numpy()
+        y_pred = y_pred.cpu().numpy()
+        cm = confusion_matrix(y_actual, y_pred)
+
+        # plot confusion metrics
+        cm_display = ConfusionMatrixDisplay(confusion_matrix=cm)
+        cm_display.plot(cmap=plt.cm.Blues)
+        plt.show()
+        return cm
+
+
 

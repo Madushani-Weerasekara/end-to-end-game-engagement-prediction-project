@@ -88,8 +88,9 @@ class DataPreprocessor:
 
         x_test_tensor = torch.tensor(x_test.to_numpy(), dtype=torch.float32)
         y_test_tensor = torch.tensor(y_test.to_numpy(), dtype=torch.long)
+        
 
-        return x_train_tensor, y_train_tensor, x_test_tensor, y_train_tensor
+        return x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor
 
 
 if __name__ == "__main__":

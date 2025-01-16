@@ -12,14 +12,14 @@ import pickle
 app = FastAPI()
 
 # Prediction output labels
-level = ['Medium', 'High', 'Low']
+level = ['Low', 'Medium', 'High']
 
 # Path to the preprocessor object
 p_path = 'artifacts\\preprocessor.pkl'
 
 # Load the pre-trained model
 model = EngageModel(11, 3, 'artifacts\\testModel.pth')
-model.load_model()
+model.load_model()  
 
 # Define the input data schema for the prediction endpoint
 class ScoringItem(BaseModel):
@@ -41,7 +41,7 @@ def read_root():
     return {"Message": "Game Engagement Model is running!"}
 
 @app.get("/predict")
-async def scoring_endpoint(item: ScoringItem):
+async def scoring_endpoint(item:ScoringItem):
     # Convert input data to dictionary
     data_point = item.dict()
     print(data_point)
@@ -54,7 +54,13 @@ async def scoring_endpoint(item: ScoringItem):
     print(pred.item())
 
     # Return the predicted level as a response
-    return level[pred.item()]
+    return {"Predicted Engagement Level:", level[pred.item()]}
 
-
+"""
+# To run the app directly
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app_api:app", host="127.0.0.1", port=8000, reload=True)
+"""
+ 
 

@@ -87,7 +87,7 @@ class EngageModel:
         print(f"Model saved at {self.path}")
 
     def load_model(self):
-        self.model.load_state_dict(torch.load(self.path))
+        self.model.load_state_dict(torch.load(self.path, weights_only=True))
         self.model.to(self.device)
         print("Model loaded")
 

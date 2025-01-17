@@ -1,1 +1,113 @@
- 
+ <!DOCTYPE html>
+ <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prediction Form</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Game Engagement Prediction</h1>
+            <form action="/result" method="post">
+
+                <!--Age-->
+                <label for="Age">Age:</label>
+                <select name="Age" id="Age" required>
+                    {% for age in range(10,61) %}
+                    <option value="{{age}}">{{age}}</option>
+                    {% endfor %}
+                </select>
+
+                <!--Gender-->
+                <label for="Gender">Gender:</label>
+                <select name="Gender" id="Gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other"|>Other</option>
+                </select>
+
+                <!--Location-->
+                <label for="Location">Location:</label>
+                <select name="Location" id="Location" required>
+                    <option value="USA">USA</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Other">Other</option>          
+                </select>
+                
+                <!-- Game Genre -->
+                 <label for="GameGenre">GameGenre:</label>
+                 <select name="GameGenre" id="GameGenre" required>
+                    <option value="Strategy">Strategy</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Action">Action</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Simulation">Simulation</option>
+                 </select>
+
+                 <!-- Play Time Hours -->
+                  <label for="PlayTimeHours">Play Time Hours:</label>
+                  <select name="PlayTimeHours" id="PlayTimeHours" required>
+                    {% for hour in range(1, 25) %}
+                    <option value="{{hour}}">{{hour}}</option>
+                    {% endfor %}
+                  </select>
+
+                  <!-- In-Game Purchases -->
+                   <label for="InGamePurchases">In Game Purchases:</label>
+                   <select name="InGamePurchases" id="InGamePurchases" required>
+                    {% for purchase in range(0, 21) %}
+                    <option value="{{purchase}}">{{purchase}}</option>
+                    {% endfor %}
+                   </select>
+
+                    <!-- Game Difficulty -->
+                    <label for="GameDifficulty">Game Difficulty:</label>
+                    <select name="GameDifficulty" id="GameDifficulty" required>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+
+                    <!-- Sessions Per Week -->
+                    <label for="SessionsPerWeek">Sessions Per Week:</label>
+                    <select name="SessionsPerWeek" id="SessionsPerWeek" required>
+                        {% for session in range(1, 15) %}
+                        <option value="{{session}}">{{session}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <!-- Average Session Duration -->
+                    <label for="AvgSessionDurationMinutes">Average Session Duration (Minutes):</label>
+                    <select name="AvgSessionDurationMinutes" id="AvgSessionDurationMinutes" required>
+                        {% for minute in range(10, 181, 10) %}
+                            <option value="{{ minute }}">{{ minute }} Minutes</option>
+                        {% endfor %}
+                    </select>
+
+                    <!-- Player Level -->
+                    <label for="PlayerLevel">Player Level:</label>
+                    <select name="PlayerLevel" id="PlayerLevel" required>
+                        {% for level in range(1, 101) %}
+                            <option value="{{ level }}">Level {{ level }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <!-- Achievements Unlocked -->
+                    <label for="AchievementsUnlocked">Achievements Unlocked:</label>
+                    <select name="AchievementsUnlocked" id="AchievementsUnlocked" required>
+                    {% for achievement in range(0, 51) %}
+                        <option value="{{ achievement }}">{{ achievement }}</option>
+                    {% endfor %}
+                    </select>
+
+                    <!-- Submit Button -->
+                    <button type="submit">Predict Engagement Level</button>
+            </form>
+
+            <a href="/">Back to Home</a>
+
+        </div> 
+    </body>
+ </html>

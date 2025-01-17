@@ -1,0 +1,100 @@
+/*General Reset*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*Body Styling*/
+body {
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/*Container Styling*/
+.container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgb(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+}
+
+/*Header Styling*/
+h1 {
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+/*Button Styling*/
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/*Form Styling*/
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+/*Input and select styling*/
+input[type="text"], input[type="number"], select {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: boarder-color 0.3s ease;
+
+}
+
+input[type="text"]:focus, input[type="number"]:focus, select {
+    border-color: #007BFF;
+
+}
+
+/*Label styling*/
+label {
+    font-weight: bold;
+    color: #555
+}
+
+/*Result Box styling*/
+.result-box {
+    background-color: #e9f7ef;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid #b2dfdb;
+}
+
+.result-box h2 {
+    color: #28a745;
+    font-size: 28px;
+}
+
+/*Button group styling*/
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}

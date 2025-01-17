@@ -8,7 +8,7 @@ def load_object(path):
         print('Preprocessor Loaded')
     return loaded_label_encoder
 
-def prepare_data_for_model(data):
+def prepare_data_for_model(data, path):
     # Converting incoming data to a DataFrame
     data_df = pd.DataFrame([data])
 

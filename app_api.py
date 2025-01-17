@@ -13,11 +13,12 @@ import pickle
 from fastapi import Form
 
 
+
 # Initialize FastAPI app
 app = FastAPI()
 
 # Mount the static directory for css, js, images etc.
-app.mount("/static", StaticFiles(directory="static", name="static"))
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Configure the templates directory
 templates = Jinja2Templates(directory="templates")
@@ -31,7 +32,7 @@ model.load_model()
 
 #  root endpoint -> Home Page
 @app.get("/", response_class=HTMLResponse)
-def read_root(request=Request):
+def read_root(request:Request):
     return templates.TemplateResponse("index.html", {"request": request, "title": "Game Engagement Model is running!"})
 
 # predict endpoint -> Prediction Form
@@ -78,6 +79,6 @@ async def get_prediction(
     predicted_level = level[prediction.item()]
 
     # Return result page with a prediction
-    return templates.TemplateResponse("result.hrml", {"request": request, "result": predicted_level})
+    return templates.TemplateResponse("result.html", {"request": request, "result": predicted_level})
  
 
